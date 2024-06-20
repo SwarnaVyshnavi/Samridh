@@ -1,0 +1,226 @@
+{% extends 'Org_Base.html' %}
+
+{% load static %}
+
+{% block Dashboard %}
+
+<main id="main">
+
+
+  <section class="breadcrumbs">
+    <div class="container">
+      <h2>{{request.session.user.org_name}}</h2>
+      <p>{{request.session.data.Org_name}} </p>
+    </div>
+  </section>
+
+
+  <section id="blog" class="blog">
+    <div class="container" data-aos="fade-up">
+      <div class="row">
+        <div class="col-lg-8 entries">
+          
+
+          <article class="entry entry-single">
+
+            <div class="entry-img">
+              <img src="{{ request.session.user.photo }}" alt="" class="img-fluid">
+            </div>
+
+            <h2 class="entry-title">
+              <a href="">{{request.session.user.org_name}}</a>
+            </h2>
+
+            <div class="entry-meta">
+              <ul>
+                {% comment %} <li class="d-flex align-items-center"><i class="bi bi-person"></i> <a href="blog-single.html">{{ request.session.user.head_firstname }} {{ request.session.user.head_lastname }}</a></li> {% endcomment %}
+                <li class="d-flex align-items-center"><i class="bi bi-house"></i> <a href="blog-single.html">{{ request.session.user.org_address }}</a></li>
+                <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <a href="blog-single.html"><time datetime="2020-01-01">{{ request.session.user.date }}</time></a></li>
+                <li class="d-flex align-items-center"><i class="bi bi-cash"></i> <a href="blog-single.html">{{ request.session.user.total_amount }}</a></li>
+              </ul>
+            </div>
+
+            <div class="entry-content">
+              {% comment %} <p>
+                Similique neque nam consequuntur ad non maxime aliquam quas. Quibusdam animi praesentium. Aliquam et laboriosam eius aut nostrum quidem aliquid dicta.
+                Et eveniet enim. Qui velit est ea dolorem doloremque deleniti aperiam unde soluta. Est cum et quod quos aut ut et sit sunt. Voluptate porro consequatur assumenda perferendis dolore.
+              </p>
+
+              <p>
+                Sit repellat hic cupiditate hic ut nemo. Quis nihil sunt non reiciendis. Sequi in accusamus harum vel aspernatur. Excepturi numquam nihil cumque odio. Et voluptate cupiditate.
+              </p> {% endcomment %}
+
+              {% comment %} <blockquote>
+                <p>
+                  Et vero doloremque tempore voluptatem ratione vel aut. Deleniti sunt animi aut. Aut eos aliquam doloribus minus autem quos.
+                </p>
+              </blockquote> {% endcomment %}
+
+            </div>
+
+          </article>
+          
+          <article class="entry entry-single">
+            {% comment %} {% for key, val in fields.items %}
+            <div class="about-section">
+              <h2 class="entry-title">{{key}}</h2>
+              <span class="edit-icon" onclick="editAbout()"><i class="fas fa-pencil-alt"></i></span>
+              <p id="aboutText">{{val}}</p>
+            </div>
+            {% endfor %} {% endcomment %}
+
+            {% for key, val in fields.items %}
+              <div class="about-section">
+                  <h2 class="entry-title">{{key}}</h2>
+                  <span class="edit-icon" onclick="editAbout('{{key}}', '{{val}}')"><i class="fas fa-pencil-alt"></i></span>
+                  <p id="{{key|lower}}">{{val}}</p>
+              </div>
+            {% endfor %}
+
+            <!-- Add Section Button -->
+            <button type="button" class="btn btn-primary mt-3" onclick="openAddSectionModal()">Add Section</button>
+
+          </article>
+          
+        
+        </div>
+
+        <div class="col-lg-4">
+          <div class="sidebar">
+
+            <h3 class="sidebar-title">Our information</h3>
+            <div class="sidebar-item categories">
+              <ul>
+                {% if request.session.user.org_type == 'Orphanage' %}
+                <li><a href="#">Boys <span>({{request.session.user.boys}})</span></a></li>
+                <li><a href="#">Girls <span>({{request.session.user.girls}})</span></a></li>
+                {% endif %}
+
+                {% if request.session.user.org_type == 'Old-Age Home' %}
+                <li><a href="#">Men <span>({{request.session.user.men}})</span></a></li>
+                <li><a href="#">Women <span>({{request.session.user.women}})</span></a></li>
+                {% endif %}
+                <li><a href="#">Donations required per month<span>({{request.session.user.expenditure}})</span></a></li>
+                {% comment %} <li><a href="#">Donations required per year<span>({{ request.session.user.expenditure|mul:12 }})</span></a></li> {% endcomment %}
+                
+              </ul>
+            </div>
+
+            <h3 class="sidebar-title">Recent Donations</h3>
+            {% if donations.count > 0 %}
+            {% for donation in donations %}
+
+            <div class="sidebar-item recent-posts">
+              <div class="post-item clearfix">
+      
+                <h4><a href="blog-single.html">{{ donation.donor_name }}</a></h4>
+                <time datetime="2020-01-01">{{ donation.date }}</time>
+              </div>
+            </div>
+            {% endfor %}
+            {% else %}
+
+            <div class="sidebar-item recent-posts">
+              <div class="post-item clearfix">
+      
+                <h4><a href="blog-single.html">No Donations ☹️</a></h4>
+                
+              </div>
+            </div>
+
+            {% endif %}
+            <h3 class="sidebar-title">Top Donars</h3>
+            {% if donations.count > 0 %}
+            
+            
+            {% for donation in topdonors %}
+
+            <div class="sidebar-item recent-posts">
+              <div class="post-item clearfix">
+                
+                <h4><a href="blog-single.html">{{forloop.counter}}. {{ donation.donor_name }}</a></h4>
+                <time datetime="2020-01-01">{{ donation.total }}</time>
+              </div>
+            </div>
+
+            {% endfor %}
+
+            {% else %}
+
+            <div class="sidebar-item recent-posts">
+              <div class="post-item clearfix">
+      
+                <h4><a href="blog-single.html">No Donations ☹️</a></h4>
+                
+              </div>
+            </div>
+
+            {% endif %}
+
+
+              
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- Edit About Modal -->
+<div class="modal fade" id="editAboutModal" tabindex="-1" aria-labelledby="editAboutModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title" id="editAboutModalLabel">Edit Section</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+              <input type="hidden" id="editKey">
+              <label for="editValue" class="form-label">Edit Value:</label>
+              <textarea class="form-control" id="editValue" rows="3"></textarea>
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary" onclick="saveAbout()">Save changes</button>
+          </div>
+      </div>
+  </div>
+</div>
+
+<!-- Modal for Adding New Section -->
+<div class="modal fade" id="addSectionModal" tabindex="-1" role="dialog" aria-labelledby="addSectionModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header bg-primary text-white">
+        <h5 class="modal-title" id="addSectionModalLabel">Add New Section</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="sectionName">Section Name</label>
+          <input type="text" class="form-control" id="sectionName">
+        </div>
+        <div class="form-group">
+          <label for="sectionDescription">Description</label>
+          <textarea class="form-control" id="sectionDescription" rows="5"></textarea>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" onclick="addNewSection()">Add Section</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  var add_sectionUrl = "{% url 'Organization:add_section' %}";
+  var edit_sectionUrl = "{% url 'Organization:edit_section' %}";
+  var registration_number = "{{ request.session.user.id }}";
+
+</script>
+
+{% endblock Dashboard %}

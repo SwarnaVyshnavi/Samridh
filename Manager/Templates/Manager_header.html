@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Dashboard</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Custom CSS -->
+
+  {% load static %}
+  
+  <link rel="stylesheet" href="{% static './css/manager_profie.css' %}">
+
+  {% comment %} {% if request.path == '/Manager/verified_organizations' %} {% endcomment %}
+  <link rel="stylesheet" type="text/css" href="{% static 'css/unverified_organization.css' %}">
+  {% comment %} {% endif %} {% endcomment %}
+
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <h1><a class="navbar-brand" href="{% url 'LandingPage' %}">Samridh</a></h1>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto middle-fields">
+            <li class="nav-item ">
+                <a class="nav-link unread-link {% if request.path == '/Manager/unverified' %}active{% endif %}" href="{% url 'Manager:unverified' %}">Unverified Organizations</a>
+            </li>
+            <li class="nav-item ">
+                <a class="nav-link unread-link {% if request.path == '/Manager/verified_organizations' %}active{% endif %} " href="{% url 'Manager:organizations' %}">Verified Organizations</a>
+            </li>
+            {% comment %} <li class="nav-item">
+                <a class="nav-link" href="#">Complaints</a>
+            </li> {% endcomment %}
+        </ul>
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    User Profile
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="{% url 'Manager:managerprofile' %}">Profile</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="{% url 'Authentication:Logout' %}">Logout</a>
+                </div>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+{% comment %} {{request.path}} {% endcomment %}
+
+{% comment %} 
+  <div class="container mt-4">
+    <div class="row justify-content-center"> <!-- Center the content -->
+      <div class="col-md-4 mb-4">
+        <div class="card">
+          <div class="card-body text-center">
+            <div class="circle">10</div>
+            <h5 class="card-title">Pending Complaints</h5>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 mb-4">
+        <div class="card">
+          <div class="card-body text-center">
+            <div class="circle">5</div>
+            <h5 class="card-title">Unverified Organizations</h5>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 mb-4">
+        <div class="card">
+          <div class="card-body text-center">
+            <div class="circle">20</div>
+            <h5 class="card-title">Total Donations Today</h5>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div> {% endcomment %}

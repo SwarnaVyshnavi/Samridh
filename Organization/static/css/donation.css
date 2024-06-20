@@ -1,0 +1,37 @@
+/* Customize modal appearance */
+.modal-content {
+    background-color: #f8f9fa;
+}
+
+/* Rounded edges for table */
+.table-bordered {
+    border-radius: 10px;
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+/* Light blue color for alternate rows */
+.table tbody tr:nth-child(even) {
+    background-color: #f2f9ff;
+}
+
+/* Remove border lines */
+.table-bordered th,
+.table-bordered td {
+    border: none;
+}
+
+/* Blue close button */
+.modal-footer .btn-secondary {
+    color: #fff;
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+/* Responsive message box */
+#message {
+    width: 100%;
+    height: auto;
+    min-height: 100px;
+    /* Minimum height to ensure visibility */
+}

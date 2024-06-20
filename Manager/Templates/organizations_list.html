@@ -1,0 +1,66 @@
+{% extends "Manager_base.html" %}
+
+{% block organizations_list %}
+
+<section class="vh-100" style="background-color: #eee;">
+    <div class="container-fluid py-5 h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col col-lg-9 col-xxl-7">
+          <div class="card rounded-3">
+            <div class="card-body p-12">
+  
+              <h4 class="text-center my-3 pb-3">Verified Organizations</h4>
+  
+              <form class="row row-cols-lg-auto g-3 justify-content-center align-items-center mb-4 pb-2" method='post'>
+                 {% csrf_token %}
+                 
+                <div class="col-12">
+                  <div class="form-outline">
+                    <input type="text" id="form1" class="form-control" placeholder="Search organization" name='title'/>
+                  </div>
+                </div>
+  
+                {% comment %} <div class="col-12">
+                  <button type="submit" class="btn btn-primary">Save</button>
+                </div> {% endcomment %}
+  
+              </form>
+  
+              <table class="table mb-8">
+  
+                <thead>
+                  <tr>
+                    {% comment %} <th scope="col">Organization Id</th> {% endcomment %}
+                    <th scope="col">Register number</th>
+                    <th scope="col">Organization name</th>
+                    <th scope="col">Organization type</th>
+                    <th scope="col">Mobile number</th>
+                    <th scope="col">Action</th>
+
+                  </tr>
+                </thead>
+  
+                <tbody>
+                    {% for organization in organizations %}
+                    <tr>
+                        <td>{{ organization.registration_number }}</td>
+                        <td>{{ organization.name }}</td>
+                        <td>{{ organization.Type }}</td>
+                        <td>{{ organization.phone_number }}</td>
+                    <td>
+                        <a href=' {% url "Manager:view_more" id=organization.id %} '><button type="submit" class="btn btn-success ms-1">View application</button></a> 
+                    </td>
+                  </tr>
+                  {% endfor %}
+                
+                </tbody>
+              </table>
+  
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</section>
+
+{% endblock organizations_list %}

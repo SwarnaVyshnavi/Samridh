@@ -1,0 +1,43 @@
+/* Custom styles */
+.about-section {
+    margin-bottom: 30px;
+}
+
+.about-section {
+    position: relative;
+}
+
+.edit-icon {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+
+/* Style for the pencil icon */
+.edit-icon {
+    cursor: pointer;
+    /* position: absolute; */
+    /* Position absolutely */
+    /* Adjust right position */
+    color: #888;
+    /* Default color */
+    transition: color 0.3s ease;
+    /* Smooth color transition */
+}
+
+.edit-icon:hover {
+    color: blue;
+    /* Change color on hover */
+}
+
+/* Round edges of modal content */
+.modal-content {
+    border-radius: 10px;
+}
+
+/* Remove scrollbar from textarea */
+#aboutTextArea {
+    resize: none;
+    overflow: hidden;
+}

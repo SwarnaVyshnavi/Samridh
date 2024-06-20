@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Manager Login Page</title>
+
+  {% load static %}
+  <link rel="stylesheet" href="{% static './css/manager_login.css' %}">
+
+</head>
+<body>
+  <div class="login-container">
+    <h2>Manager Login</h2>
+
+    {% if message %}
+          <div class="row mt-2">
+            <div class="col-12 p-3 mb-2 bg-danger text-white " style="text-align:center">
+              <p class="mt-2" style="color:red">{{ message }}</p>
+            </div>
+          </div>
+    {% endif %}
+    
+    <form action="" method="post">
+      {% csrf_token %}
+
+      <label for="Username">Username</label>
+      <input type="text" id="registration_number" name="Username" required>
+
+      <label for="password">Password:</label>
+      <input type="password" id="password" name="password" required>
+
+      <button type="submit">Login</button>
+    </form>
+    <p>Don't have an account? <a href="{% url 'Manager_registration' %}">Register here</a></p>
+    <p>Back to <a href="{% url '' %}">Home</a></p>
+  </div>
+</body>
+</html>

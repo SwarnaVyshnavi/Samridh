@@ -1,0 +1,256 @@
+{% extends base_template %}
+
+{% block OrganizationSearch %}
+
+{% load static %}
+  <main id="main">
+    <br><br><br>
+    <!-- ======= Breadcrumbs ======= -->
+     {% comment %} <section class="breadcrumbs"> {% endcomment %}
+      {% comment %} <div class="container">
+
+        <ol>
+          <li><a href="index.html">Organizations</a></li>
+          <li>Search</li>
+        </ol>
+        <h2>Search</h2>
+
+      </div> {% endcomment %}
+    {% comment %} </section><!-- End Breadcrumbs -->  {% endcomment %}
+
+    <!-- ======= Blog Section ======= -->
+    <section id="blog" class="blog">
+      <div class="container" data-aos="fade-up">
+
+        <div class="row">
+
+          <div class="col-lg-8 entries">
+
+            {% if Organizations.count > 0 %}
+              {% for org in Organizations %}
+              <article class="entry">
+              <div class="entry-img">
+                <img src="{% static '/img/kids3.jpg' %}" alt="" class="img-fluid">
+              </div>
+
+              <h2 class="entry-title">
+                <a href="blog-single.html">{{org.name}}</a>
+              </h2>
+
+              <div class="entry-meta">
+                <ul>
+                  <li class="d-flex align-items-center"><i class="bi bi-house"></i> <a href="blog-single.html">{{org.address}}</a></li>
+                  {% comment %} <li class="d-flex align-items-center"><i class="bi bi-person"></i> <a href="blog-single.html">Vyshnavi</a></li> {% endcomment %}
+                  <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <a href="blog-single.html"><time datetime="2020-01-01">{{org.date}}</time></a></li>
+                  {% comment %} <li class="d-flex align-items-center"><i class="bi bi-cash"></i> <a href="blog-single.html">23.5K</a></li> {% endcomment %}
+                  {% comment %} <i class="bi bi-house-door-fill"></i> {% endcomment %}
+                </ul>
+              </div>
+
+              <div class="entry-content">
+                {% comment %} <p>Generation Yuva's mission is to provide a safe, nurturing, and enriching environment for orphaned and vulnerable children, 
+                  empowering them to reach their full potential and become responsible and contributing members of society. </p> {% endcomment %}
+                <div class="read-more">
+                  
+                  <a href="{% url 'Organization' org.id %}">Donate</a>
+                </div>
+              </div>
+            </article>
+              {% endfor %}
+
+              {% else %}
+
+              <h2 class="entry-title">
+                No organizations exist.
+              </h2>
+
+              {% endif %}
+            <!-- End blog entry -->
+
+            {% comment %} <article class="entry">
+
+              <div class="entry-img">
+                <img src="{% static '/img/blog/blog-2.jpg' %}" alt="" class="img-fluid">
+              </div>
+
+              <h2 class="entry-title">
+                <a href="blog-single.html">Arya Orphanage</a>
+              </h2>
+
+              <div class="entry-meta">
+                <ul>
+                  <li class="d-flex align-items-center"><i class="bi bi-person"></i> <a href="blog-single.html">Ishak</a></li>
+                  <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <a href="blog-single.html"><time datetime="2020-01-01">Jan 1, 2023</time></a></li>
+                  <li class="d-flex align-items-center"><i class="bi bi-chat-dots"></i> <a href="blog-single.html">12.5K</a></li>
+                </ul>
+              </div>
+
+              <div class="entry-content">
+                <p>
+                  Arya Orphanage also strives to create a sense of community and belonging for its residents, fostering relationships among the children and encouraging their involvement in various activities and programs. Through education and skill-building initiatives, 
+                  the orphanage empowers its residents to lead fulfilling lives and become productive members of society.</p>
+                <div class="read-more">
+                  <a href="blog-single.html">Donate</a>
+                </div>
+              </div>
+
+            </article><!-- End blog entry -->
+
+            <article class="entry">
+
+              <div class="entry-img">
+                <img src="{% static '/img/blog/blog-3.jpg' %}" alt="" class="img-fluid">
+              </div>
+
+              <h2 class="entry-title">
+                <a href="blog-single.html">Akshaya Old Age Home</a>
+              </h2>
+
+              <div class="entry-meta">
+                <ul>
+                  <li class="d-flex align-items-center"><i class="bi bi-person"></i> <a href="blog-single.html">Mohitha</a></li>
+                  <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <a href="blog-single.html"><time datetime="2020-01-01">Mar 1, 2022</time></a></li>
+                  <li class="d-flex align-items-center"><i class="bi bi-chat-dots"></i> <a href="blog-single.html">35.7K</a></li>
+                </ul>
+              </div>
+
+              <div class="entry-content">
+                <p>
+                  Akshaya Old Age Home also strives to create a sense of community and belonging for its residents, fostering relationships among the children and encouraging their involvement in various activities and programs. Through education and skill-building initiatives, 
+                  the orphanage empowers its residents to lead fulfilling lives and become productive members of society.</p>
+                <div class="read-more">
+                  <a href="blog-single.html">Donate</a>
+                </div>
+              </div>
+
+            </article><!-- End blog entry -->
+
+            <article class="entry">
+
+              <div class="entry-img">
+                <img src="{% static '/img/blog/blog-4.jpg' %}" alt="" class="img-fluid">
+              </div>
+
+              <h2 class="entry-title">
+                <a href="blog-single.html">Non rem rerum nam cum quo minus. Dolor distinctio deleniti explicabo eius exercitationem.</a>
+              </h2>
+
+              <div class="entry-meta">
+                <ul>
+                  <li class="d-flex align-items-center"><i class="bi bi-person"></i> <a href="blog-single.html">John Doe</a></li>
+                  <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <a href="blog-single.html"><time datetime="2020-01-01">Jan 1, 2020</time></a></li>
+                  <li class="d-flex align-items-center"><i class="bi bi-chat-dots"></i> <a href="blog-single.html">12 Comments</a></li>
+                </ul>
+              </div>
+
+              <div class="entry-content">
+                <p>
+                  Aspernatur rerum perferendis et sint. Voluptates cupiditate voluptas atque quae. Rem veritatis rerum enim et autem. Saepe atque cum eligendi eaque iste omnis a qui.
+                  Quia sed sunt. Ea asperiores expedita et et delectus voluptates rerum. Id saepe ut itaque quod qui voluptas nobis porro rerum. Quam quia nesciunt qui aut est non omnis. Inventore occaecati et quaerat magni itaque nam voluptas. Voluptatem ducimus sint id earum ut nesciunt sed corrupti nemo.
+                </p>
+                <div class="read-more">
+                  <a href="blog-single.html">Donate</a>
+                </div>
+              </div>
+
+            </article><!-- End blog entry --> {% endcomment %}
+
+            {% comment %} <div class="blog-pagination">
+              <ul class="justify-content-center">
+                <li class="active"><a href="#">1</a></li>
+                <li class=""><a href="#">2</a></li>
+                <li class=""><a href="#">3</a></li>
+              </ul>
+            </div> {% endcomment %}
+
+          </div><!-- End blog entries list -->
+
+          <div class="col-lg-4">
+
+            <div class="sidebar">
+
+              <h3 class="sidebar-title">Search</h3>
+              <div class="sidebar-item search-form">
+                
+                <form method='post' action='{% url "OrganizationSearch" %}'>
+                  {% csrf_token %}
+                  <input type="text" name = 'name'>
+                  <button type="submit"><i class="bi bi-search"></i></button>
+                </form>
+              </div><!-- End sidebar search formn-->
+
+              <h3 class="sidebar-title">Categories</h3>
+              <div class="sidebar-item categories">
+                <ul>
+                  <li><a href="#">Orphanages <span>({{types.orphanages}})</span></a></li>
+                  <li><a href="#">Old Age Homes <span>({{types.oldagehomes}})</span></a></li>
+                  {% comment %} <li><a href="#">Travel <span>(5)</span></a></li>
+                  <li><a href="#">Design <span>(22)</span></a></li>
+                  <li><a href="#">Creative <span>(8)</span></a></li>
+                  <li><a href="#">Educaion <span>(14)</span></a></li> {% endcomment %}
+                </ul>
+              </div><!-- End sidebar categories-->
+
+              {% comment %} <h3 class="sidebar-title">Recent Posts</h3>
+              <div class="sidebar-item recent-posts">
+                <div class="post-item clearfix">
+                  <img src="{% static '/img/blog/blog-recent-1.jpg' %}" alt="">
+                  <h4><a href="blog-single.html">Nihil blanditiis at in nihil autem</a></h4>
+                  <time datetime="2020-01-01">Jan 1, 2020</time>
+                </div>
+
+                <div class="post-item clearfix">
+                  <img src="{% static '/img/blog/blog-recent-2.jpg' %}" alt="">
+                  <h4><a href="blog-single.html">Quidem autem et impedit</a></h4>
+                  <time datetime="2020-01-01">Jan 1, 2020</time>
+                </div>
+
+                <div class="post-item clearfix">
+                  <img src="{% static '/img/blog/blog-recent-3.jpg' %}" alt="">
+                  <h4><a href="blog-single.html">Id quia et et ut maxime similique occaecati ut</a></h4>
+                  <time datetime="2020-01-01">Jan 1, 2020</time>
+                </div>
+
+                <div class="post-item clearfix">
+                  <img src="{% static '/img/blog/blog-recent-4.jpg' %}" alt="">
+                  <h4><a href="blog-single.html">Laborum corporis quo dara net para</a></h4>
+                  <time datetime="2020-01-01">Jan 1, 2020</time>
+                </div>
+
+                <div class="post-item clearfix">
+                  <img src="{% static '/img/blog/blog-recent-5.jpg' %}" alt="">
+                  <h4><a href="blog-single.html">Et dolores corrupti quae illo quod dolor</a></h4>
+                  <time datetime="2020-01-01">Jan 1, 2020</time>
+                </div>
+
+              </div><!-- End sidebar recent posts--> {% endcomment %}
+
+              {% comment %} <h3 class="sidebar-title">Tags</h3>
+              <div class="sidebar-item tags">
+                <ul>
+                  <li><a href="#">App</a></li>
+                  <li><a href="#">IT</a></li>
+                  <li><a href="#">Business</a></li>
+                  <li><a href="#">Mac</a></li>
+                  <li><a href="#">Design</a></li>
+                  <li><a href="#">Office</a></li>
+                  <li><a href="#">Creative</a></li>
+                  <li><a href="#">Studio</a></li>
+                  <li><a href="#">Smart</a></li>
+                  <li><a href="#">Tips</a></li>
+                  <li><a href="#">Marketing</a></li>
+                </ul>
+              </div><!-- End sidebar tags--> {% endcomment %}
+
+            </div><!-- End sidebar -->
+
+          </div><!-- End blog sidebar -->
+
+        </div>
+
+      </div>
+    </section><!-- End Blog Section -->
+
+  </main><!-- End #main -->
+
+{% endblock %}

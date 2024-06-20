@@ -1,0 +1,166 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Organization Registration</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="{% static '/css/Registration.css' %}">
+
+  </head>
+<body>
+
+<div class="container">
+  <div class="card">
+    <div class="card-body">
+      <form id="registrationForm" method="post" action="{% url 'Authentication:Organization-Registration' %}">
+        {% csrf_token %}
+
+        {% if message %}
+          <div class="row mt-2">
+            <div class="col-12 p-3 mb-2 bg-danger text-white " style="text-align:center">
+              <p class="mt-2" style="color:red">{{ message }}</p>
+            </div>
+          </div>
+        {% endif %}
+
+        <div class="step-content active" id="step1">
+          <h3>Step 1: Organization Information</h3>
+
+          <div class="form-group">
+            <label for="fullName">Organization Name</label>
+            <input type="text" class="form-control" id="fullName" name="org_name" required>
+          </div>
+
+          <div class="form-group">
+            <label for="fullName">Registration Number</label>
+            <input type="text" class="form-control" id="fullName" name="org_registration_number" required>
+          </div>
+
+          <div class="form-group">
+            <label for="fullName">Phone Number</label>
+            <input type="text" class="form-control"   pattern="[0-9]{10}"  name="org_phone_number" required>
+          </div>
+
+          <div class="form-group">
+            <label for="fullName">Type of Organization</label>
+              <select class="form-outline form-control select" name="org_type" Required>
+                <option value="1" disable>Organization Type</option>
+                <option value="Orphanage">Orphanage</option>
+                <option value="Old-Age Home">Old-Age Home</option>
+              </select>
+          </div>
+
+          <button type="button" id = 'validateButton' class="btn btn-primary next-btn">Next</button>
+        </div>
+
+        <div class="step-content" id="step2">
+          <h3>Step 2: Contact Information</h3>
+
+          <div class="form-group">
+            <label for="fullName">Address</label>
+            <input type="text" class="form-control" id="fullName" name="org_address" required>
+          </div>
+
+          <div class="form-group">
+            <label for="fullName">State</label>
+            <input type="text" class="form-control" id="fullName" name="org_state" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="fullName">Pincode</label>
+            <input type="text" class="form-control" id="fullName" name="org_pincode" required>
+          </div>
+
+          <div class="form-group">
+            <label for="email">Organization Email</label>
+            <div class="input-group">
+              <input type="email" class="form-control" id="email" name="org_email" required>
+              <div class="input-group-append">
+                <button type="button" class="btn btn-secondary" id="sendOTP">Send OTP</button>
+              </div>
+            </div>
+            <span id="emailVerificationMessage" style="color: green;"></span>
+          </div>
+
+          <div class="form-group">
+            <label for="otp">Enter OTP</label>
+            <input type="text" class="form-control" id="otp" name="otp" required disabled>
+          </div>
+
+          <button type="button" class="btn btn-primary prev-btn">Previous</button>
+          <button type="button" class="btn btn-primary next-btn">Next</button>
+          <button type="button" class="btn btn-primary" id="verifyOTP">Verify OTP</button>
+        </div>
+
+        <div class="step-content" id="step3">
+          <h3>Step 3: Manager Information</h3>
+
+          <div class="form-group">
+            <label for="fullName">First Name</label>
+            <input type="text" class="form-control" id="fullName" name="head_firstname" required>
+          </div>
+
+          <div class="form-group">
+            <label for="fullName">Last Name</label>
+            <input type="text" class="form-control" id="fullName" name="head_lastname" required>
+          </div>
+
+          <div class="form-group">
+            <label for="fullName">email</label>
+            <input type="email" class="form-control" id="fullName" name="head_email" required>
+          </div>
+
+          <div class="form-group">
+            <label for="fullName">Phone number</label>
+            <input type="text" class="form-control" id="fullName" name="head_phone_number" required>
+          </div>
+
+          <button type="button" class="btn btn-primary next-btn">Next</button>
+
+        </div>
+
+        <div class="step-content" id="step4">
+          <h3>Step 4: Account Creation</h3>
+          <div class="form-group">
+            <label for="username">Document</label>
+            <input type="file" id="fullname" accept="application/pdf" name="certificate" required>
+          </div>
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" class="form-control" id="password" name="org_password" required>
+          </div>
+          <div class="form-group">
+            <label for="confirmPassword">Confirm Password</label>
+            <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" required>
+            <span id="passwordMatchMessage" style="color: red;"></span>
+          </div>
+          <button type="button" class="btn btn-primary prev-btn">Previous</button>
+          <button type="submit" class="btn btn-success">Register</button>
+        </div>
+        <input type="hidden" name="ready-to-submit" value="yes">
+      </form>
+    </div>
+  </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
+
+<script>
+  var verifyOTPUrl = "{% url 'Authentication:verify_otp' %}";
+  var sendOTPUrl = "{% url 'Authentication:send_otp' %}";
+</script>
+
+<script src="{% static '/js/Registration.js' %}"></script>
+
+
+
+
+</body>
+</html>
